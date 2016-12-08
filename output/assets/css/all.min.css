@@ -3,15 +3,13 @@
 @font-face{font-family:custom-sans-serif;src:local(Helvetica);unicode-range:U+00-024F}
 *{font-family:custom-sans-serif;margin:0;padding:0;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
 :focus{outline:0}
-@media screen and (min-width:960px){.share_btn{margin:5px;padding:5px;border:3px solid gray;display:inline-block;cursor:pointer}
+.share_btn{margin:5px;padding:5px;border:3px solid gray;display:inline-block;cursor:pointer}
 .share_btn:active{-moz-transform:translateX(1px) translateY(1px);-ms-transform:translateX(1px) translateY(1px);-webkit-transform:translateX(1px) translateY(1px);transform:translateX(1px) translateY(1px)}
-}
 .funC{background-color:#CFFFF5}
 .parC{background-color:#ABFFE4}
 .retC{background-color:#B9F7FF}
 .locC{background-color:#CCF5FF}
 .desC{background-color:#D6DFFF}
-body{overflow:hidden}
 .container{width:100%;height:600px;position:relative;color:#141414}
 .container .thead{width:100%;height:45px;position:absolute}
 .container .thead .row{height:100%}
