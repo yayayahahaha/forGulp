@@ -3,13 +3,18 @@
 googleRobotDetectSiteCode = "6LebHA4UAAAAADrcb7ybClL47mfzXV100qYNvlYX"; //my own
 googleImNotRobot = null;
 
-/* Google Robot Detect part */
-(function(d, s) {
-	var js, fjs = d.getElementsByTagName(s)[0];
-	js = d.createElement(s);
-	js.src = "https://www.google.com/recaptcha/api.js?onload=googleImNotRobotOnload&render=explicit";
-	fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script'));
+$(document).ready(function() {
+	var checkIfThisPageNeedRobotDetector = document.querySelector('#google-auth-robot');
+	if (checkIfThisPageNeedRobotDetector) {
+		/* Google Robot Detect part */
+		(function(d, s) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			js = d.createElement(s);
+			js.src = "https://www.google.com/recaptcha/api.js?onload=googleImNotRobotOnload&render=explicit";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script'));
+	}
+});
 
 function googleImNotRobotOnload() {
 	grecaptcha.render('google-auth-robot', {
