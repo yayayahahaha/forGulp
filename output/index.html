@@ -1,1 +1,72 @@
-<!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"><meta charset="UTF-8"><link rel="Shortcut Icon" type="image/x-icon"><meta property="fb:app_id" content="1590515954569893"><meta property="og:title" content="臉書分享標題"><meta property="og:description" content="臉書分享內文"><meta property="og:site_name"><meta property="og:type" content="website"><meta property="og:url" content="此頁面的網址"><meta property="og:image" content="臉書分享顯示的圖片"><script src="assets/js/index.min.js"></script><link rel="stylesheet" href="assets/css/all.min.css"><title>Sample Index</title></head><body><span href class="share-fb"><div>Facebook 分享範例</div></span> <span href class="share-line"><div>Line 分享範例</div></span> <span href class="share-twitter"><div>Twitter 分享範例</div></span><div id="google-auth-robot"></div></body></html>
+<!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"><meta charset="UTF-8"><link rel="Shortcut Icon" type="image/x-icon"><meta property="fb:app_id" content="1590515954569893"><meta property="og:title" content="臉書分享標題"><meta property="og:description" content="臉書分享內文"><meta property="og:site_name"><meta property="og:type" content="website"><meta property="og:url" content="此頁面的網址"><meta property="og:image" content="臉書分享顯示的圖片"><script src="assets/js/index.min.js"></script><link rel="stylesheet" href="assets/css/all.min.css"><title>Sample Index</title></head><body><span href class="share-fb"><div class="share_btn">Facebook 分享範例</div></span> <span href class="share-line"><div class="share_btn">Line 分享範例</div></span> <span href class="share-twitter"><div class="share_btn">Twitter 分享範例</div></span><div id="google-auth-robot"></div><div class="container"><div class="thead"><div class="row"><div class="col1 title funC">Function</div><div class="col2 title parC">Parameter</div><div class="col1 title retC">Return</div><div class="col1 title locC">所在地</div><div class="col7 title desC">說明</div></div></div><div class="tbody"><div class="row"><div class="col1 content funC">makeSureFB</div><div class="col2 content parC">function <span class="fade"></span><br>function <span class="fade"></span><br>function <span class="fade"></span></div><div class="col1 content retC">NULL</div><div class="col1 content locC">fb_checker.js</div><div class="col7 content desC"><pre>
+第一個參數為臉書驗證成功時的callback function
+第二個參數為臉書驗證失敗時的callback function
+第三個參數為一定會執行的callback function
+
+修改臉書appId 也是在此檔案
+                    </pre></div></div><div class="row"><div class="col1 content funC">stringBytes</div><div class="col2 content parC">String</div><div class="col1 content retC">int</div><div class="col1 content locC">form_checker.js</div><div class="col7 content desC"><pre>
+傳入字串，會回傳該字串的半形字個數
+單一中文半形字個數:2
+單一英文半形字個數:1
+                    </pre></div></div><div class="row"><div class="col1 content funC">toggleInput</div><div class="col2 content parC">DOM object / DOM object array<br>String <span class="fade"></span><br>String <span class="fade"></span></div><div class="col1 content retC">NULL</div><div class="col1 content locC">form_checker.js</div><div class="col7 content desC"><pre>
+點擊 text 或 textarea 後會清空裡面的初始值 
+若離開該text 或 textarea，會依據裡面的值決定是否會回到初始文字或不變 
+第一個參數為點選後輸入時顯示的文字的顏色字串 <span class="comments">ex: "red"</span>
+第二個參數為為離開後/點選前 初始文字的顏色字串 <span class="comments">ex: "rgba(0,0,0,0.2)"</span>
+
+toggleInput(input,"red");
+<input type="text" value="我是初始值" id="toggleId">
+                    </pre></div></div><div class="row"><div class="col1 content funC">formChecker</div><div class="col2 content parC">object, object...</div><div class="col1 content retC">String</div><div class="col1 content locC">form_checker.js</div><div class="col7 content desC"><pre>
+formChecker({},{},...{});
+參數範例:
+var inputObjectExample = {
+    "query": ".input1", <span class="comments">//要確認的欄位，用css-like的選擇器決定，checkbox 或radio 可以加上共同class 再一起選</span>
+    "errorText": "如果是空的的話會顯示的錯誤訊息\n", <span class="comments">//預設為"errorText: 沒有設定錯誤訊息\n", 建議在後面加上換行符號，依用途改為 \n 或 &ltbr&gt</span>
+    "checkboxEmpty": false, <span class="comments">//用來確認此checkbox 可否全部不選, true 是可以全部不選, false是起碼要選1 個, 沒寫的話預設是false</span>
+    "wrongEmail":"如果email格式錯誤會回傳的訊息", <span class="comments">//預設為"email 格式錯誤\n"</span>
+    "wrongPhone":"如果phone格式錯誤會回傳的訊息", <span class="comments">//預設為"手機格式錯誤\n"</span>
+    "elseRule": function(o) { <span class="comments">//此function 用來做空值的以外的判斷，回傳一個字串, 參數o 為該form 的dom 物件實體</span>
+        return "回傳一個額外判斷的錯誤\n";
+    }
+};
+
+會回傳一個String 的form表單確認表
+回傳空值代表沒有錯誤，其餘為顯示錯誤訊息
+可用 text, textarea, select, email, phone, radio, checkbox
+text 或textarea 若以共用class 的形式一口氣設定全部的錯誤訊，只能設定單一錯誤訊息，但仍會判斷email 或手機
+若要顯示不同的錯誤訊息建議個別傳入每個text 的獨立css-like 選擇器
+checkbox 和 radio 可以以共用class 的方式一口氣設定全部的錯誤訊息
+
+query 的值放的是css-like 的選擇器  (ex: .class, #id, tag, [name=myName]...etc)
+errorText 為錯誤時會顯示的錯誤訊息，建議在後面依需求加上 \n 或是 &ltbr&gt
+checkboxEmpty 是專門給checkbox設定的屬性，用來判斷checkbox可否為空值
+wrongEmail 回傳如果email 格式錯誤時會回傳的訊息，預設為"email 格式錯誤\n"
+wrongPhone 回傳如果手機格式錯誤時會回傳的訊息，預設為"手機格式判斷錯誤\n"
+elseRule 用於需要做額外判斷時宣告的一個function, 一樣回傳字串
+
+email 不需寫額外的判斷式，但透過此css-like 選擇器選出的物件的name 或type 必須為email
+phone 不需寫額外的判斷式，但透過此css-like 選擇器選出的物件的name 必須為phone
+                    </pre></div></div><div class="row"><div class="col1 content funC">isMobile</div><div class="col2 content parC">int <span class="fade"></span></div><div class="col1 content retC">boolean</div><div class="col1 content locC">mobile_n_browser.js</div><div class="col7 content desC"><pre>
+用來確認目前裝置為行動裝置或是電腦
+true 為行動裝置
+false 為電腦
+
+若有傳入參數
+如果瀏覽器視窗大於該數字就會判定為電腦版
+如果瀏覽器視窗小於該數字就會判定為手機板
+                    </pre></div></div><div class="row"><div class="col1 content funC">whichBrowser</div><div class="col2 content parC">NULL</div><div class="col1 content retC">[DeviceString, BrowserString]</div><div class="col1 content locC">mobile_n_browser.js</div><div class="col7 content desC"><pre>
+用來判斷目前所使用的瀏覽器類型
+回傳的陣列的第一個值為作業系統判定(android / iphone / web)
+回傳的陣列的第二個值為使用的瀏覽器判定(firefox / msie / opera / safari / line / unknow)
+Chrome 和 Safari 回傳的瀏覽器判定都會是 safari
+若要判斷使用者是否用Android 系統開啟line 瀏覽器可以用此方式判斷
+                    </pre></div></div><div class="row"><div class="col1 content funC">sendToAjax</div><div class="col2 content parC">String<br>JSON<br>function <span class="fade"></span></div><div class="col1 content retC">NULL</div><div class="col1 content locC">sendToAjax.js</div><div class="col7 content desC"><pre>
+第一個參數String 為要使用的eventType
+做為API 要呼叫後續的哪支API 判定使用，需和後端討論要取什麼名字
+
+第二個參數為一個json 格式的物件，用來作為post給後端使用的input 值
+
+第三個參數為帶有response 回傳參數的callback function，即ajax 裡的always function
+
+目前還沒決定該API 的路徑，所以還需修改sendToAjax.js 檔案
+                    </pre></div></div><div class="row"><div class="col1 content funC">function 名稱</div><div class="col2 content parC">參數</div><div class="col1 content retC">回傳值</div><div class="col1 content locC">所在地</div><div class="col7 content desC">說明</div></div><div class="row"><div class="col1 content funC">function 名稱</div><div class="col2 content parC">參數</div><div class="col1 content retC">回傳值</div><div class="col1 content locC">所在地</div><div class="col7 content desC">說明</div></div><div class="row"><div class="col1 content funC">function 名稱</div><div class="col2 content parC">參數</div><div class="col1 content retC">回傳值</div><div class="col1 content locC">所在地</div><div class="col7 content desC">說明</div></div></div></div></body></html>

@@ -97,7 +97,7 @@ function formChecker() {
 	function singleObject(oDom, oInput) {
 		oDom = oDom[0];
 
-		if (oDom.tagName.toLowerCase() === 'input' && oDom.getAttribute('type') === 'text') {
+		if (oDom.tagName.toLowerCase() === 'input' && oDom.getAttribute('type') === 'text' || oDom.getAttribute('type') === 'email') {
 			if (oDom.value === oDom.defaultValue) {
 				errorText += oInput.errorText;
 			} else {

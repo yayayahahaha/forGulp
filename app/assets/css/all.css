@@ -23,21 +23,20 @@
 
 /* Ipad series */
 /* Web series */
-@media screen and (min-width: 960px) {
-  .share_btn {
-    margin: 5px;
-    padding: 5px;
-    border: 3px solid gray;
-    display: inline-block;
-    cursor: pointer;
-  }
-  .share_btn:active {
-    -moz-transform: translateX(1px) translateY(1px);
-    -ms-transform: translateX(1px) translateY(1px);
-    -webkit-transform: translateX(1px) translateY(1px);
-    transform: translateX(1px) translateY(1px);
-  }
+.share_btn {
+  margin: 5px;
+  padding: 5px;
+  border: 3px solid gray;
+  display: inline-block;
+  cursor: pointer;
 }
+.share_btn:active {
+  -moz-transform: translateX(1px) translateY(1px);
+  -ms-transform: translateX(1px) translateY(1px);
+  -webkit-transform: translateX(1px) translateY(1px);
+  transform: translateX(1px) translateY(1px);
+}
+
 .funC {
   background-color: #CFFFF5;
 }
@@ -56,10 +55,6 @@
 
 .desC {
   background-color: #D6DFFF;
-}
-
-body {
-  overflow: hidden;
 }
 
 .container {

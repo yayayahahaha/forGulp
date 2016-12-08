@@ -29,17 +29,20 @@
 
 /* Web series */
 @media screen and (min-width: 960px) {
-	.share_btn{
-		margin: 5px;
-		padding: 5px;
-		border: 3px solid gray;
-		display: inline-block;
-		cursor: pointer;
-		&:active{
-			@include transform(translateX(1px) translateY(1px));
-		}
+
+}
+
+.share_btn{
+	margin: 5px;
+	padding: 5px;
+	border: 3px solid gray;
+	display: inline-block;
+	cursor: pointer;
+	&:active{
+		@include transform(translateX(1px) translateY(1px));
 	}
 }
+
 $funColor: #CFFFF5;
 $parameterColor: #ABFFE4;
 $returnColor: #B9F7FF;
@@ -51,9 +54,6 @@ $locColor: #CCF5FF;
 .locC{background-color: $locColor;}
 .desC{background-color: $descriptColor;}
 
-body{
-	overflow: hidden;
-}
 
 .container{
 	width: 100%;
