@@ -4,6 +4,7 @@ window.onload = function() {
 	/*toggleInout function example*/
 	toggleInput(toggle,"red");
 
-	console.log(whichBrowser());
+	/* whichBrowser function example */
+	console.log("whichBrowser function example: ",whichBrowser());
 
 }
