@@ -21,8 +21,8 @@ function stringBytes(c) {
 	toggleInput(domObject or domObjectArray, colorAfterClick, colorBeforeClock);
 */
 function toggleInput(input, colorAfter, colorBefoe) {
-	colorBefoe = colorBefoe ? colorBefoe : o.style.color;
-	colorAfter = colorAfter ? colorAfter : o.style.color;
+	colorBefoe = colorBefoe ? colorBefoe : input.style.color;
+	colorAfter = colorAfter ? colorAfter : input.style.color;
 	if (input.length) {
 		for (var i = 0; i < input.length; i++) {
 			toggleInputInnerFunction(input[i]);

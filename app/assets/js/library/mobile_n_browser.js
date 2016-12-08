@@ -40,17 +40,25 @@ var versions = function() {
 }();
 
 function whichBrowser() {
+	deviceFromWhichBrowserFunction = null;
+	if (/iPhone/i.test(navigator.userAgent)) {
+		deviceFromWhichBrowserFunction = "iphone";
+	} else if (/Android/i.test(navigator.userAgent)) {
+		deviceFromWhichBrowserFunction = "android";
+	}
+	deviceFromWhichBrowserFunction = deviceFromWhichBrowserFunction ? deviceFromWhichBrowserFunction : "web";
+
 	if (navigator.userAgent.match("Firefox")) {
-		return "firefox";
+		return [deviceFromWhichBrowserFunction, "firefox"];
 	} else if (navigator.userAgent.match("MSIE")) {
-		return "msie";
+		return [deviceFromWhichBrowserFunction, "msie"];
 	} else if (navigator.userAgent.match("Opera")) {
-		return "opera";
+		return [deviceFromWhichBrowserFunction, "opera"];
 	} else if (navigator.userAgent.match("Safari")) {
-		return "safari";
+		return [deviceFromWhichBrowserFunction, "safari"];
 	} else if (versions.line) {
-		return "line";
+		return [deviceFromWhichBrowserFunction, "line"];
 	} else {
-		return "Unknow";
+		return [deviceFromWhichBrowserFunction, "unknow"];
 	}
 }
