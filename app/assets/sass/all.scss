@@ -1,0 +1,33 @@
+@import "compass/css3";
+
+@font-face{
+    font-family: custom-sans-serif;
+    src: local("Heiti TC"), local("微軟正黑體"), local("Microsoft JhengHei");
+    unicode-range: U+4E00-9FFF;
+}
+
+@font-face{
+    font-family: custom-sans-serif;
+    src: local(Helvetica);
+    unicode-range: U+00-024F;
+}
+
+* {
+	font-family: "custom-sans-serif";
+	margin: 0px;
+	padding: 0px;
+	@include box-sizing(border-box);
+	&:focus{
+		outline: none;
+	}
+}
+
+/* Ipad series */
+@media screen and (max-width: 959px){
+
+}
+
+/* Web series */
+@media screen and (min-width: 960px) {
+	
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
+
+    <meta charset="UTF-8">
+    <link rel="Shortcut Icon" type="image/x-icon" href="">
+
+    <meta property="fb:app_id" content="1590515954569893">
+    <meta property='og:title' content="臉書分享標題">
+    <meta property='og:description' content="臉書分享內文">
+    <meta property='og:site_name' content=''>
+    <meta property='og:type' content='website'>
+    <meta property='og:url' content="此頁面的網址">
+    <meta property='og:image' content="臉書分享顯示的圖片">
+
+    <!-- build:js -->
+    <script type="text/javascript" src="assets/js/library/jquery.js" ></script>
+    <script type="text/javascript" src="assets/js/library/fb_checker.js"></script>
+    <script type="text/javascript" src="assets/js/library/form_checker.js"></script>
+    <script type="text/javascript" src="assets/js/library/share.active.min.js" ></script>
+    <script type="text/javascript" src="assets/js/library/share_2.js" ></script>
+
+    <script type="text/javascript" src="assets/js/page2.js"></script>
+    <!-- endbuild -->
+    <!-- 主要的js 檔案名稱需和html 一樣 -->
+
+    <!-- build:css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/all.css"> 
+    <!-- endbuild -->
+    <!-- 盡量全部的html 檔案都吃同一支css -->
+
+    <title>Sample page2</title>
+</head>
+<body>
+    <!-- 如果要加新的html 頁面，需修正gulpfile.js 裡的jsList, 此陣列的長度應和html 檔案數目一致 -->
+
+    <!-- 從fb_checker.js 裡面修正Facebook 的appId -->
+    <span href="" class="share-fb">
+        <div>fb share btn example</div>
+    </span>
+    <span href="" class="share-line">
+        <div>line share btn example</div>
+    </span>
+    <span href="" class="share-twitter">
+        <div class="share-twitter">twitter share btn example</div>
+    </span>
+</body>
+</html>
