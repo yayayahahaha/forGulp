@@ -1,5 +1,5 @@
-// appIdString = 1590515954569893; //company
-appIdString = 1760402077549165; // my own
+appIdString = 1590515954569893; //company
+// appIdString = 1760402077549165; // my own
 
 /* Facebook part? */
 /*(function(d, s, id) {
@@ -26,22 +26,53 @@ function makeSureFB(success, fail, always) {
 	fail = fail ? fail : function(){};
 	always = always ? always : function(){};
 
-	FB.getLoginStatus(function(res) {
-		res.status==='connected'
+	FB.getLoginStatus(function(resL) {
+		resL.status==='connected'
 		?FB.api('/me',function(res) {
 			res.id
-			?success()
-			:fail();
+			?success(res, resL)
+			:fail(res, resL);
 		})
-		:FB.login(function(res) {
-			res.status==='connected'
+		:FB.login(function(resL) {
+			resL.status==='connected'
 			?FB.api('/me',function(res) {
 				res.id
-				?success()
-				:fail();
+				?success(res, resL)
+				:fail(res,resL);
 			})
-			:fail();
+			:fail(res, resL);
 		});
 	});
 	always();
+}
+
+
+function loginFB(success, fail, always) {
+    success = success ? success : function() {};
+    fail = fail ? fail : function() {};
+    always = always ? always : function() {};
+
+    if(!FB.getUserID()){
+        FB.login(function(resL) {
+            resL.status === 'connected' ? FB.api('/me', function(res) {
+                res.id ? success(res, resL) : fail(res, resL);
+            }) : fail(resL);
+        });
+    }else{
+        FB.getLoginStatus(function(resL) {
+            console.log(resL);
+            if(!FB.getAccessToken()){
+                FB.login(function(resL) {
+                    resL.status === 'connected' ? FB.api('/me', function(res) {
+                        res.id ? success(res, resL) : fail(res, resL);
+                    }) : fail(resL);    
+                });
+            }else{
+                FB.api("/me",function(res) {
+                    res.id ? success(res, resL) : fail(res, resL);
+                })
+            }
+        })
+    }
+    always();
 }

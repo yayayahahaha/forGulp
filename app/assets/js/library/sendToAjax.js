@@ -1,14 +1,17 @@
-function sendToAjax(eventType, content, callback) {
+console.log("why");
+
+function calllll() {
+	alterline
+	console.log("hellooooo");
+}
+
+function sendToAjaxa(url, input, callback) {
 	callback = callback ? callback : function() {}
 
 	$.ajax({
-			url: '',
+			url: url,
 			type: 'post',
-			data: {
-				eventType: eventType,
-				content: content,
-				google_auth_key: googleImNotRobot
-			},
+			data: input,
 		})
 		.always(function(res) {
 			callback(res);
