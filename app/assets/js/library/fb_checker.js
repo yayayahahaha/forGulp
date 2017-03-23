@@ -1,6 +1,30 @@
-function readyDOMObjct(cssLike, success, timeGap, times) {
+function allready(init) {
+    if (!init) {return "please input allready function as parameter"};
+    var aCounterWhoCountForDocumentReady = 0;
+    function allreadyCallback() {
+        aCounterWhoCountForDocumentReady++;
+        if (aCounterWhoCountForDocumentReady == 2) {
+            init();
+        }
+    }
+    var aIntervalWhoUseToDetectDocumentReadyOrNot = setInterval(function() {
+        if (document.readyState !== "complete" || document.readyState !== "interactive") {
+            clearInterval(aIntervalWhoUseToDetectDocumentReadyOrNot);
+            allreadyCallback();
+        }
+    },200);
+
+    var aIntervalWhoUseToDetectFBExistOrNot = setInterval(function() {
+        if (FB) {
+            clearInterval(aIntervalWhoUseToDetectFBExistOrNot);
+            allreadyCallback();
+        }
+    },200);
+}
+
+function domready(cssLike, success, timeGap, times) {
     if (!cssLike) {
-        return "please unique css-like selector";
+        return "please unique css-like selector as parameter";
     }
     success = success ? success : function(o) {console.log(o);}
     timeGap = timeGap ? timeGap : 50;
@@ -19,7 +43,7 @@ function readyDOMObjct(cssLike, success, timeGap, times) {
             aCounterWhoCountTimesOfTesting++;
             if (aCounterWhoCountTimesOfTesting == times) {
                 clearInterval(aIntervalWhoUseToDetectDOMExistOrNot);
-                console.log("timeout, fail to get DOM");
+                console.error("timeout, fail to get DOM");
                 success(null);
             }
         }
