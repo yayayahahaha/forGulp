@@ -1,6 +1,5 @@
-function readyDOMObjct(cssLike, success, timeGap, times) {
+function readyDOMObjct(cssLike, timeGap, times) {
     if (!cssLike) {return "please unique css-like selector";}
-    success = success ? success : function() {console.log(document.querySelector(cssLike));};
     timeGap = timeGap ? timeGap : 50;
     times = times ? times : 100;
 
@@ -8,14 +7,19 @@ function readyDOMObjct(cssLike, success, timeGap, times) {
     var aIntervalWhoUseToDetectDOMExistOrNot = setInterval(function() {
         if(document.querySelector(cssLike)){
             clearInterval(aIntervalWhoUseToDetectDOMExistOrNot);
-            document.querySelectorAll(cssLike).length == 1 
-                ? success(document.querySelector(cssLike))
-                : success(document.querySelectorAll(cssLike));
+             if (document.querySelectorAll(cssLike).length == 1 ){
+                console.log("123123123");
+                return document.querySelector(cssLike);
+             }else{
+                console.log("asdf");
+                return document.querySelectorAll(cssLike);
+             }
         }else{
             aCounterWhoCountTimesOfTesting++;
             if (aCounterWhoCountTimesOfTesting == times) {
                 clearInterval(aIntervalWhoUseToDetectDOMExistOrNot);
                 console.log("timeout, fail to get DOM");
+                return null;
             }
         }
     },timeGap);
