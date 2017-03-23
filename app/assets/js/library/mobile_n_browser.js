@@ -55,7 +55,15 @@ function whichBrowser() {
 	} else if (navigator.userAgent.match("Opera")) {
 		return [deviceFromWhichBrowserFunction, "opera"];
 	} else if (navigator.userAgent.match("Safari")) {
-		return [deviceFromWhichBrowserFunction, "safari"];
+		var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+		var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+		if (isChrome){
+			return [deviceFromWhichBrowserFunction, "chrome"];
+		} ;
+		if (isSafari){
+			return [deviceFromWhichBrowserFunction, "safari"];
+		} ;
+
 	} else if (versions.line) {
 		return [deviceFromWhichBrowserFunction, "line"];
 	} else {
