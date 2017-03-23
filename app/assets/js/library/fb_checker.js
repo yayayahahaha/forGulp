@@ -1,14 +1,47 @@
-function statusFB(success, fail, always) {
+function readyDOMObjct(cssLike, success, timeGap, times) {
+    if (!cssLike) {return "please unique css-like selector";}
+    success = success ? success : function() {console.log(document.querySelector(cssLike));};
+    timeGap = timeGap ? timeGap : 50;
+    times = times ? times : 100;
+
+    var aCounterWhoCountTimesOfTesting = 0;
+    var aIntervalWhoUseToDetectDOMExistOrNot = setInterval(function() {
+        if(document.querySelector(cssLike)){
+            clearInterval(aIntervalWhoUseToDetectDOMExistOrNot);
+            document.querySelectorAll(cssLike).length == 1 
+                ? success(document.querySelector(cssLike))
+                : success(document.querySelectorAll(cssLike));
+        }else{
+            aCounterWhoCountTimesOfTesting++;
+            if (aCounterWhoCountTimesOfTesting == times) {
+                clearInterval(aIntervalWhoUseToDetectDOMExistOrNot);
+                console.log("timeout, fail to get DOM");
+            }
+        }
+    },timeGap);
+}
+
+function statusFB(success, justLogin, fail, always) {
     success = success ? success : function() {};
+    justLogin = justLogin ? justLogin : function() {};
     fail = fail ? fail : function() {};
     always = always ? always : function() {};
 
-    var aIntervalWhoUseToDetectFBExistOrNot =  setTimeout(function() {
+    var aIntervalWhoUseToDetectFBExistOrNot =  setInterval(function() {
         if(FB){
             clearInterval(aIntervalWhoUseToDetectFBExistOrNot);
-            FB.getLoginStatus(function(res) {
-               res.status === "connected" ? success(res.status) : fail(res.status) ;
+            FB.getLoginStatus(function(resL) {
+               resL.status === "connected" 
+               ? FB.api("/me", function(res) {
+                   res.id
+                   ? success(FB.getUserID(), res)
+                   : fail(resL, res)
+               })
+               : resL.status === "not_authorized" 
+                   ? justLogin(FB.getUserID()) 
+                   : fail(resL.status);
             });
+            always();
         }
     }, 200);
 }
