@@ -8,10 +8,8 @@ function readyDOMObjct(cssLike, timeGap, times) {
         if(document.querySelector(cssLike)){
             clearInterval(aIntervalWhoUseToDetectDOMExistOrNot);
              if (document.querySelectorAll(cssLike).length == 1 ){
-                console.log("123123123");
                 return document.querySelector(cssLike);
              }else{
-                console.log("asdf");
                 return document.querySelectorAll(cssLike);
              }
         }else{
