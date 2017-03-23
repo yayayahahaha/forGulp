@@ -1,12 +1,17 @@
+/* make sure FB Object is initialed and Document content is loaded */
 function allready(init) {
-    if (!init) {return "please input allready function as parameter"};
+    /* if user didn't pass any parameter or parameter type is not function, return */
+    if (!init || typeof init !== "function") {return "please input allready function as parameter"};
     var aCounterWhoCountForDocumentReady = 0;
+
+    /* if Document content is loaded and FB Object is initialed, this function will be trigger */
     function allreadyCallback() {
         aCounterWhoCountForDocumentReady++;
         if (aCounterWhoCountForDocumentReady == 2) {
             init();
         }
     }
+    /* Check Document content is loaded or not */
     var aIntervalWhoUseToDetectDocumentReadyOrNot = setInterval(function() {
         if (document.readyState !== "complete" || document.readyState !== "interactive") {
             clearInterval(aIntervalWhoUseToDetectDocumentReadyOrNot);
@@ -14,6 +19,7 @@ function allready(init) {
         }
     },200);
 
+    /* Check FB Object is initialed or not */
     var aIntervalWhoUseToDetectFBExistOrNot = setInterval(function() {
         if (FB) {
             clearInterval(aIntervalWhoUseToDetectFBExistOrNot);
@@ -22,6 +28,7 @@ function allready(init) {
     },200);
 }
 
+/* make sure the DOM Object we use is perfectly exist and loaded */
 function domready(cssLike, success, timeGap, times) {
     if (!cssLike) {
         return "please unique css-like selector as parameter";
@@ -50,6 +57,7 @@ function domready(cssLike, success, timeGap, times) {
     }, timeGap);
 }
 
+/* check user FB login Status, but don't ask them login */
 function statusFB(success, always) {
     success = success ? success : function() {};
     always = always ? always : function() {};
@@ -69,6 +77,7 @@ function statusFB(success, always) {
     }, 200);
 }
 
+/* check user FB login status, and ask them login */
 function loginFB(success, fail, always) {
     success = success ? success : function() {};
     fail = fail ? fail : function() {};
