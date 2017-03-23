@@ -5,24 +5,38 @@ function loginFB(success, fail, always) {
 
     if (!FB.getUserID()) {
         FB.login(function(resL) {
-            resL.status === 'connected' ? FB.api('/me', function(res) {
-                res.id ? success(res, resL) : fail(res, resL);
-            }) : fail(resL);
+            resL.status === 'connected' 
+            ? FB.api('/me', function(res) {
+                res.id 
+                ? success(res, resL) 
+                : fail(res, resL);
+            }) 
+            : fail(resL);
         });
     } else {
         if (!FB.getAccessToken()) {
             FB.getLoginStatus(function(resL) {
-                resL.status === 'connected' ? FB.api('/me', function(res) {
-                    res.id ? success(res, resL) : fail(res, resL);
-                }) : FB.login(function(resL) {
-                    resL.status === 'connected' ? FB.api('/me', function(res) {
-                        res.id ? success(res, resL) : fail(res, resL);
-                    }) : fail(resL);
+                resL.status === 'connected' 
+                ? FB.api('/me', function(res) {
+                    res.id 
+                    ? success(res, resL) 
+                    : fail(res, resL);
+                }) 
+                : FB.login(function(resL) {
+                    resL.status === 'connected' 
+                    ? FB.api('/me', function(res) {
+                        res.id 
+                        ? success(res, resL) 
+                        : fail(res, resL);
+                    }) 
+                    : fail(resL);
                 });
             });
         } else {
             FB.api("/me", function(res) {
-                res.id ? success(res) : fail(res);
+                res.id 
+                ? success(res) 
+                : fail(res);
             })
         }
     }
