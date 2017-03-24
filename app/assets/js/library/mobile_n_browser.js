@@ -59,10 +59,10 @@ function whichBrowser() {
 		var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
 		if (isChrome){
 			return [deviceFromWhichBrowserFunction, "chrome"];
-		} ;
+		}
 		if (isSafari){
 			return [deviceFromWhichBrowserFunction, "safari"];
-		} ;
+		}
 
 	} else if (versions.line) {
 		return [deviceFromWhichBrowserFunction, "line"];

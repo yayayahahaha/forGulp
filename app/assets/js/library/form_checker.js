@@ -21,6 +21,10 @@ function stringBytes(c) {
 	toggleInput(domObject or domObjectArray, colorAfterClick, colorBeforeClock);
 */
 function toggleInput(input, colorAfter, colorBefoe) {
+	if (!input) {
+		console.error("input object is not a object, please checke again.");
+		return null;
+	}
 	colorBefoe = colorBefoe ? colorBefoe : input.style.color;
 	colorAfter = colorAfter ? colorAfter : input.style.color;
 	if (input.length) {
@@ -39,13 +43,13 @@ function toggleInput(input, colorAfter, colorBefoe) {
 			} else {
 				o.select();
 			}
-		}
+		};
 		o.onblur = function() {
-			if (o.value == "") {
+			if (o.value === "") {
 				o.value = o.defaultValue;
 				o.style.color = colorBefoe;
 			}
-		}
+		};
 	}
 }
 
