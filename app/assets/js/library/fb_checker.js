@@ -4,8 +4,13 @@
 function allready(init) {
     /* if user didn't pass any parameter or parameter type is not function, return */
     if (!init || typeof init !== "function") {
-        return "please input allready function as parameter";
+        console.log("please input allready function as parameter");
+        return null;
+    } else if (!window.fbAsyncInit) {
+        console.log("please initial FB object");
+        return null;
     }
+    
     var aCounterWhoCountForDocumentReady = 0;
 
     /* if Document content is loaded and FB Object is initialed, this function will be trigger */
