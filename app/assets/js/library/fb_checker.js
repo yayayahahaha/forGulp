@@ -36,7 +36,6 @@ function allready(init) {
                 allreadyCallback();
             }
         } catch (e) {}
-
     }, 200);
 }
 
@@ -77,7 +76,8 @@ function statusFB(success, always) {
     always = always ? always : function() {};
 
     var aIntervalWhoUseToDetectFBExistOrNot = setInterval(function() {
-        if (FB) {
+        try{
+            if (FB) {
             clearInterval(aIntervalWhoUseToDetectFBExistOrNot);
             FB.getLoginStatus(function(resL) {
                 resL.status === "connected" ?
@@ -86,6 +86,7 @@ function statusFB(success, always) {
             });
             always();
         }
+        }catch(e){}
     }, 200);
 }
 
@@ -96,7 +97,8 @@ function loginFB(success, fail, always) {
     always = always ? always : function() {};
 
     var aIntervalWhoUseToDetectFBExistOrNot = setInterval(function() {
-        if (FB) {
+        try{
+            if (FB) {
             clearInterval(aIntervalWhoUseToDetectFBExistOrNot);
             if (!FB.getUserID()) {
                 FB.login(function(resL) {
@@ -129,6 +131,7 @@ function loginFB(success, fail, always) {
                 }
             }
         }
+        }catch(e){}
     }, 200);
     always();
 }
