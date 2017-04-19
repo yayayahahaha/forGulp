@@ -144,6 +144,7 @@ function loginFB(success, fail, always) {
     always();
 }
 
+/* simple window.fbAsyncInit checker */
 function fbAsyncInitChecker() {
     if (!window.fbAsyncInit) {
         return false;
