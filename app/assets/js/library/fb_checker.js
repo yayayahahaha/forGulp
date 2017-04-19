@@ -72,66 +72,81 @@ function domready(cssLike, success, timeGap, times) {
 
 /* check user FB login Status, but don't ask them login */
 function statusFB(success, always) {
+    if (!fbAsyncInitChecker()) {
+        console.info("you didn't have window.fbAsync callback function");
+        return;
+    }
     success = success ? success : function() {};
     always = always ? always : function() {};
 
     var aIntervalWhoUseToDetectFBExistOrNot = setInterval(function() {
-        try{
+        try {
             if (FB) {
-            clearInterval(aIntervalWhoUseToDetectFBExistOrNot);
-            FB.getLoginStatus(function(resL) {
-                resL.status === "connected" ?
-                    success(FB.getUserID(), FB.getAccessToken()) : resL.status === "not_authorized" ?
-                    success(FB.getUserID(), null) : success(null, null);
-            });
-            always();
-        }
-        }catch(e){}
+                clearInterval(aIntervalWhoUseToDetectFBExistOrNot);
+                FB.getLoginStatus(function(resL) {
+                    resL.status === "connected" ?
+                        success(FB.getUserID(), FB.getAccessToken()) : resL.status === "not_authorized" ?
+                        success(FB.getUserID(), null) : success(null, null);
+                });
+                always();
+            }
+        } catch (e) {}
     }, 200);
 }
 
 /* check user FB login status, and ask them login */
 function loginFB(success, fail, always) {
+    if (!fbAsyncInitChecker()) {
+        console.info("you didn't have window.fbAsync callback function");
+        return;
+    }
     success = success ? success : function() {};
     fail = fail ? fail : function() {};
     always = always ? always : function() {};
 
     var aIntervalWhoUseToDetectFBExistOrNot = setInterval(function() {
-        try{
+        try {
             if (FB) {
-            clearInterval(aIntervalWhoUseToDetectFBExistOrNot);
-            if (!FB.getUserID()) {
-                FB.login(function(resL) {
-                    resL.status === 'connected' ?
-                        FB.api('/me', function(res) {
-                            res.id ?
-                                success(res, resL) : fail(res, resL);
-                        }) : fail(resL);
-                });
-            } else {
-                if (!FB.getAccessToken()) {
-                    FB.getLoginStatus(function(resL) {
+                clearInterval(aIntervalWhoUseToDetectFBExistOrNot);
+                if (!FB.getUserID()) {
+                    FB.login(function(resL) {
                         resL.status === 'connected' ?
                             FB.api('/me', function(res) {
                                 res.id ?
                                     success(res, resL) : fail(res, resL);
-                            }) : FB.login(function(resL) {
-                                resL.status === 'connected' ?
-                                    FB.api('/me', function(res) {
-                                        res.id ?
-                                            success(res, resL) : fail(res, resL);
-                                    }) : fail(resL);
-                            });
+                            }) : fail(resL);
                     });
                 } else {
-                    FB.api("/me", function(res) {
-                        res.id ?
-                            success(res) : fail(res);
-                    });
+                    if (!FB.getAccessToken()) {
+                        FB.getLoginStatus(function(resL) {
+                            resL.status === 'connected' ?
+                                FB.api('/me', function(res) {
+                                    res.id ?
+                                        success(res, resL) : fail(res, resL);
+                                }) : FB.login(function(resL) {
+                                    resL.status === 'connected' ?
+                                        FB.api('/me', function(res) {
+                                            res.id ?
+                                                success(res, resL) : fail(res, resL);
+                                        }) : fail(resL);
+                                });
+                        });
+                    } else {
+                        FB.api("/me", function(res) {
+                            res.id ?
+                                success(res) : fail(res);
+                        });
+                    }
                 }
             }
-        }
-        }catch(e){}
+        } catch (e) {}
     }, 200);
     always();
+}
+
+function fbAsyncInitChecker() {
+    if (!window.fbAsyncInit) {
+        return false;
+    }
+    return true;
 }
