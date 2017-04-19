@@ -104,43 +104,43 @@ function loginFB(success, fail, always) {
     fail = fail ? fail : function() {};
     always = always ? always : function() {};
 
-    var aIntervalWhoUseToDetectFBExistOrNot = setInterval(function() {
-        try {
-            if (FB) {
-                clearInterval(aIntervalWhoUseToDetectFBExistOrNot);
-                if (!FB.getUserID()) {
-                    FB.login(function(resL) {
+    try {
+        if (FB) {
+            if (!FB.getUserID()) {
+                FB.login(function(resL) {
+                    resL.status === 'connected' ?
+                        FB.api('/me', function(res) {
+                            res.id ?
+                                success(res, resL) : fail(res, resL);
+                        }) : fail(resL);
+                });
+            } else {
+                if (!FB.getAccessToken()) {
+                    FB.getLoginStatus(function(resL) {
                         resL.status === 'connected' ?
                             FB.api('/me', function(res) {
                                 res.id ?
                                     success(res, resL) : fail(res, resL);
-                            }) : fail(resL);
+                            }) : FB.login(function(resL) {
+                                resL.status === 'connected' ?
+                                    FB.api('/me', function(res) {
+                                        res.id ?
+                                            success(res, resL) : fail(res, resL);
+                                    }) : fail(resL);
+                            });
                     });
                 } else {
-                    if (!FB.getAccessToken()) {
-                        FB.getLoginStatus(function(resL) {
-                            resL.status === 'connected' ?
-                                FB.api('/me', function(res) {
-                                    res.id ?
-                                        success(res, resL) : fail(res, resL);
-                                }) : FB.login(function(resL) {
-                                    resL.status === 'connected' ?
-                                        FB.api('/me', function(res) {
-                                            res.id ?
-                                                success(res, resL) : fail(res, resL);
-                                        }) : fail(resL);
-                                });
-                        });
-                    } else {
-                        FB.api("/me", function(res) {
-                            res.id ?
-                                success(res) : fail(res);
-                        });
-                    }
+                    FB.api("/me", function(res) {
+                        res.id ?
+                            success(res) : fail(res);
+                    });
                 }
             }
-        } catch (e) {}
-    }, 200);
+        }
+    } catch (e) {
+        console.info("FB object hasn't ready!");
+    }
+
     always();
 }
 
