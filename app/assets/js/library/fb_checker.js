@@ -22,7 +22,7 @@ function allready(init) {
     }
     /* Check Document content is loaded or not */
     var aIntervalWhoUseToDetectDocumentReadyOrNot = setInterval(function() {
-        if (document.readyState !== "complete" || document.readyState !== "interactive") {
+        if (document.readyState === "complete" || document.readyState === "interactive") {
             clearInterval(aIntervalWhoUseToDetectDocumentReadyOrNot);
             allreadyCallback();
         }
