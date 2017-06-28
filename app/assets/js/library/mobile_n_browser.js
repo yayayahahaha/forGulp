@@ -63,6 +63,7 @@ function whichBrowser() {
 		if (isSafari){
 			return [deviceFromWhichBrowserFunction, "safari"];
 		}
+		return [deviceFromWhichBrowserFunction, "iphone_emulation"];
 
 	} else if (versions.line) {
 		return [deviceFromWhichBrowserFunction, "line"];

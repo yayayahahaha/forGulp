@@ -1,12 +1,12 @@
 /* jshint expr : true */
 
 /* make sure FB Object is initialed and Document content is loaded */
-function allready(init) {
+window.allready = function(init, appId) {
     /* if user didn't pass any parameter or parameter type is not function, return */
     if (!init || typeof init !== "function") {
         console.log("please input allready function as parameter");
         return null;
-    } else if (!window.fbAsyncInit) {
+    } else if (!fbAsyncInitChecker()) { 
         console.log("please initial FB object");
         return null;
     }
@@ -32,15 +32,23 @@ function allready(init) {
     var aIntervalWhoUseToDetectFBExistOrNot = setInterval(function() {
         try {
             if (FB) {
+                if (appId) {
+                    FB.init({
+                        appId: appId,
+                        cookie: true,
+                        xfbml: true,
+                        version: 'v2.8'
+                    });
+                }
                 clearInterval(aIntervalWhoUseToDetectFBExistOrNot);
                 allreadyCallback();
             }
         } catch (e) {}
     }, 200);
-}
+};
 
 /* make sure the DOM Object we use is perfectly exist and loaded */
-function domready(cssLike, success, timeGap, times) {
+window.domready = function(cssLike, success, timeGap, times) {
     if (!cssLike) {
         return "please unique css-like selector as parameter";
     }
@@ -68,10 +76,10 @@ function domready(cssLike, success, timeGap, times) {
             }
         }
     }, timeGap);
-}
+};
 
 /* check user FB login Status, but don't ask them login */
-function statusFB(success, always) {
+window.statusFB = function(success, always) {
     if (!fbAsyncInitChecker()) {
         console.info("you didn't have window.fbAsync callback function");
         return;
@@ -92,10 +100,10 @@ function statusFB(success, always) {
             }
         } catch (e) {}
     }, 200);
-}
+};
 
 /* check user FB login status, and ask them login */
-function loginFB(success, fail, always) {
+window.loginFB = function(success, fail, always) {
     if (!fbAsyncInitChecker()) {
         console.info("you didn't have window.fbAsync callback function");
         return;
@@ -138,16 +146,17 @@ function loginFB(success, fail, always) {
             }
         }
     } catch (e) {
+        console.log(e);
         console.info("FB object hasn't ready!");
     }
 
     always();
-}
+};
 
 /* simple window.fbAsyncInit checker */
-function fbAsyncInitChecker() {
+window.fbAsyncInitChecker = function() {
     if (!window.fbAsyncInit) {
         return false;
     }
     return true;
-}
+};

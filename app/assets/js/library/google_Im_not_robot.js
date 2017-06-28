@@ -27,4 +27,7 @@ function googleImNotRobotOnload() {
 
 function afterGoogleAuthCallbackFunction(res) {
 	googleImNotRobot = res;
+	console.log("success");
+	console.log(res);
+	console.log("success");
 }

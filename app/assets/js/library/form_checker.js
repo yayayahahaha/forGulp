@@ -1,7 +1,7 @@
 /*
 	stringBytes(string);
 */
-function stringBytes(c) {
+window.stringBytes = function(c) {
 	var n = c.length,
 		s;
 	var len = 0;
@@ -14,13 +14,13 @@ function stringBytes(c) {
 	}
 	return len;
 	/*http://www.puritys.me/docs-blog/article-107-String-Length-%E4%B8%AD%E6%96%87%E5%AD%97%E4%B8%B2%E9%95%B7%E5%BA%A6.html*/
-}
+};
 
 /* 
 	text and textarea only 
 	toggleInput(domObject or domObjectArray, colorAfterClick, colorBeforeClock);
 */
-function toggleInput(input, colorAfter, colorBefoe) {
+window.toggleInput = function(input, colorAfter, colorBefoe) {
 	if (!input) {
 		console.error("input object is not a object, please checke again.");
 		return null;
@@ -51,7 +51,7 @@ function toggleInput(input, colorAfter, colorBefoe) {
 			}
 		};
 	}
-}
+};
 
 /* 
 	formChecker({},{},...{});
@@ -84,7 +84,7 @@ var inputObjectExample = {
 	}
 };
 
-function formChecker() {
+window.formChecker = function() {
 	var objects = arguments,
 		errorText = "";
 
@@ -182,9 +182,9 @@ function formChecker() {
 		}
 		errorText += oInput.elseRule(oDom);
 	}
-}
+};
 
-function emptyFunction() {
+window.emptyFunction = function() {
 	return "";
-}
+};
 
